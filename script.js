@@ -9,6 +9,8 @@ let operator;
 let display = "";
 let state = "input";
 let result;
+let overflow = false;
+
 numberButtons.forEach((element) => {
   element.addEventListener("click", () => {
     if (state == "input") {
@@ -28,6 +30,7 @@ operatorButtons.forEach((element) => {
     clear();
     if (numbers.length > 1) {
       operate(numbers[0], numbers[1], operator);
+      overflow = true;
     }
   });
 });
@@ -79,7 +82,14 @@ function operate(num1, num2, operator) {
   }
   displayBox.textContent = result;
   state = "answer";
-  numbers.pop();
-  numbers.pop();
+  if (overflow) {
+    numbers.pop();
+    numbers.pop();
+    numbers[0] = result;
+  } else {
+    numbers.pop();
+    numbers.pop();
+  }
+
   console.log(numbers);
 }
