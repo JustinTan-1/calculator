@@ -29,8 +29,8 @@ operatorButtons.forEach((element) => {
     numbers.push(parseInt(displayBox.textContent));
     clear();
     if (numbers.length > 1) {
-      operate(numbers[0], numbers[1], operator);
       overflow = true;
+      operate(numbers[0], numbers[1], operator);
     }
   });
 });
@@ -82,10 +82,11 @@ function operate(num1, num2, operator) {
   }
   displayBox.textContent = result;
   state = "answer";
-  if (overflow) {
+  console.log(overflow);
+  if (overflow == true) {
     numbers.pop();
     numbers.pop();
-    numbers[0] = result;
+    numbers.push(result);
   } else {
     numbers.pop();
     numbers.pop();
