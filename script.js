@@ -16,7 +16,7 @@ numberButtons.forEach((element) => {
     if (state == "input") {
       displayBox.textContent += element.textContent;
     } else if (state == "answer") {
-      clear();
+      clearDisplay();
       displayBox.textContent += element.textContent;
       state = "input";
     }
@@ -27,7 +27,7 @@ operatorButtons.forEach((element) => {
   element.addEventListener("click", () => {
     operator = element.textContent;
     numbers.push(parseInt(displayBox.textContent));
-    clear();
+    clearDisplay();
     if (numbers.length > 1) {
       overflow = true;
       operate(numbers[0], numbers[1], operator);
@@ -36,18 +36,23 @@ operatorButtons.forEach((element) => {
 });
 
 clearButton.addEventListener("click", () => {
-  clear();
+  clearMem();
 });
 
 equalsButton.addEventListener("click", () => {
-  if (numbers.length < 2) {
-    numbers.push(parseInt(displayBox.textContent));
-    operate(numbers[0], numbers[1], operator);
-  }
+  numbers.push(parseInt(displayBox.textContent));
+  overflow = false;
+  operate(numbers[0], numbers[1], operator);
 });
 
-function clear() {
+function clearDisplay() {
   displayBox.textContent = "";
+}
+
+function clearMem() {
+  clearDisplay();
+  numbers.pop();
+  numbers.pop();
 }
 
 function add(num1, num2) {
@@ -67,20 +72,23 @@ function divide(num1, num2) {
 
 function operate(num1, num2, operator) {
   switch (operator) {
-    case "add":
+    case "+":
       result = add(num1, num2);
       break;
-    case "subtract":
+    case "-":
       result = subtract(num1, num2);
       break;
-    case "multiply":
+    case "x":
       result = multiply(num1, num2);
       break;
-    case "divide":
+    case "÷":
       result = divide(num1, num2);
       break;
   }
   displayBox.textContent = result;
+  if (displayBox.textContent.length > 10) {
+    displayBox.textContent = Math.round(result * 10 ** 9) / 10 ** 9;
+  }
   state = "answer";
   console.log(overflow);
   if (overflow == true) {
