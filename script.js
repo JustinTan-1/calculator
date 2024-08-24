@@ -84,6 +84,11 @@ function operate(num1, num2, operator) {
     numbers.pop();
     return;
   }
+  if (num2 == undefined || num1 == undefined) {
+    numbers.pop();
+    numbers.pop();
+    return;
+  }
   switch (operator) {
     case "+":
       result = add(num1, num2);
