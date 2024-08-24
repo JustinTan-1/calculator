@@ -11,6 +11,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .shell {
@@ -27,7 +29,8 @@
 
 .number,
 .clear,
-.compute {
+.compute,
+.point {
   height: 60px;
   width: 60px;
 }

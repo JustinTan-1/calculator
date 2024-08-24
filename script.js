@@ -3,6 +3,7 @@ const displayBox = document.querySelector(".display");
 const clearButton = document.querySelector(".clear");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".compute");
+const pointButton = document.querySelector(".point");
 
 let numbers = [];
 let operator;
@@ -23,10 +24,17 @@ numberButtons.forEach((element) => {
   });
 });
 
+pointButton.addEventListener("click", (element) => {
+  if (!displayBox.textContent.includes(".")) {
+    console.log(element.target.textContent);
+    displayBox.textContent += element.target.textContent;
+  }
+});
+
 operatorButtons.forEach((element) => {
   element.addEventListener("click", () => {
     operator = element.textContent;
-    numbers.push(parseInt(displayBox.textContent));
+    numbers.push(parseFloat(displayBox.textContent));
     clearDisplay();
     if (numbers.length > 1) {
       overflow = true;
@@ -40,7 +48,7 @@ clearButton.addEventListener("click", () => {
 });
 
 equalsButton.addEventListener("click", () => {
-  numbers.push(parseInt(displayBox.textContent));
+  numbers.push(parseFloat(displayBox.textContent));
   overflow = false;
   operate(numbers[0], numbers[1], operator);
 });
@@ -90,7 +98,6 @@ function operate(num1, num2, operator) {
     displayBox.textContent = Math.round(result * 10 ** 9) / 10 ** 9;
   }
   state = "answer";
-  console.log(overflow);
   if (overflow == true) {
     numbers.pop();
     numbers.pop();
