@@ -26,7 +26,6 @@ numberButtons.forEach((element) => {
 
 pointButton.addEventListener("click", (element) => {
   if (!displayBox.textContent.includes(".")) {
-    console.log(element.target.textContent);
     displayBox.textContent += element.target.textContent;
   }
 });
@@ -61,6 +60,7 @@ function clearMem() {
   clearDisplay();
   numbers.pop();
   numbers.pop();
+  operator = undefined;
 }
 
 function add(num1, num2) {
@@ -79,6 +79,11 @@ function divide(num1, num2) {
 }
 
 function operate(num1, num2, operator) {
+  if (operator == undefined) {
+    numbers.pop();
+    numbers.pop();
+    return;
+  }
   switch (operator) {
     case "+":
       result = add(num1, num2);
