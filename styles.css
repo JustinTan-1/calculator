@@ -16,7 +16,7 @@
 }
 
 .shell {
-  height: 360px;
+  height: 400px;
   width: 300px;
   border: 3px solid black;
   display: flex;
@@ -28,11 +28,15 @@
 }
 
 .number,
-.clear,
 .compute,
 .point {
   height: 60px;
   width: 60px;
+}
+
+.clear {
+  height: 40px;
+  width: 275px;
 }
 
 .compute {

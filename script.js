@@ -6,17 +6,18 @@ const equalsButton = document.querySelector(".compute");
 const pointButton = document.querySelector(".point");
 
 let numbers = [];
-let operator;
+let operator = "";
 let display = "";
 let state = "input";
 let result;
 let overflow = false;
+let operatorHistory = [];
 
 numberButtons.forEach((element) => {
   element.addEventListener("click", () => {
     if (state == "input") {
       displayBox.textContent += element.textContent;
-    } else if (state == "answer") {
+    } else if (state == "solidState") {
       clearDisplay();
       displayBox.textContent += element.textContent;
       state = "input";
@@ -33,11 +34,16 @@ pointButton.addEventListener("click", (element) => {
 operatorButtons.forEach((element) => {
   element.addEventListener("click", () => {
     operator = element.textContent;
+    operatorHistory.push(operator);
     numbers.push(parseFloat(displayBox.textContent));
-    clearDisplay();
+    state = "solidState";
     if (numbers.length > 1) {
       overflow = true;
-      operate(numbers[0], numbers[1], operator);
+      operate(
+        numbers[0],
+        numbers[1],
+        operatorHistory[operatorHistory.length - 2]
+      );
     }
   });
 });
@@ -60,7 +66,7 @@ function clearMem() {
   clearDisplay();
   numbers.pop();
   numbers.pop();
-  operator = undefined;
+  operator = "";
 }
 
 function add(num1, num2) {
@@ -79,7 +85,7 @@ function divide(num1, num2) {
 }
 
 function operate(num1, num2, operator) {
-  if (operator == undefined) {
+  if (operator == "") {
     numbers.pop();
     numbers.pop();
     return;
@@ -107,7 +113,7 @@ function operate(num1, num2, operator) {
   if (displayBox.textContent.length > 10) {
     displayBox.textContent = Math.round(result * 10 ** 9) / 10 ** 9;
   }
-  state = "answer";
+  state = "solidState";
   if (overflow == true) {
     numbers.pop();
     numbers.pop();
@@ -116,6 +122,6 @@ function operate(num1, num2, operator) {
     numbers.pop();
     numbers.pop();
   }
-
+  operator = "";
   console.log(numbers);
 }
