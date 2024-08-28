@@ -36,7 +36,8 @@ operatorButtons.forEach((element) => {
     operator = element.textContent;
     operatorHistory.push(operator);
     numbers.push(parseFloat(displayBox.textContent));
-    state = "solidState";
+    clearDisplay();
+    console.log(numbers);
     if (numbers.length > 1) {
       overflow = true;
       operate(
@@ -64,8 +65,7 @@ function clearDisplay() {
 
 function clearMem() {
   clearDisplay();
-  numbers.pop();
-  numbers.pop();
+  numbers.splice(0, numbers.length);
   operator = "";
 }
 
@@ -86,13 +86,11 @@ function divide(num1, num2) {
 
 function operate(num1, num2, operator) {
   if (operator == "") {
-    numbers.pop();
-    numbers.pop();
+    numbers.splice(0, numbers.length);
     return;
   }
   if (num2 == undefined || num1 == undefined) {
-    numbers.pop();
-    numbers.pop();
+    numbers.splice(0, numbers.length);
     return;
   }
   switch (operator) {
@@ -115,13 +113,10 @@ function operate(num1, num2, operator) {
   }
   state = "solidState";
   if (overflow == true) {
-    numbers.pop();
-    numbers.pop();
+    numbers.splice(0, numbers.length);
     numbers.push(result);
   } else {
-    numbers.pop();
-    numbers.pop();
+    numbers.splice(0, numbers.length);
   }
   operator = "";
-  console.log(numbers);
 }
