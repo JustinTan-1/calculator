@@ -49,9 +49,15 @@ operatorButtons.forEach((element) => {
   });
 });
 
+operatorButtons.forEach((element) => {
+  addmouseHover(element);
+});
+
 clearButton.addEventListener("click", () => {
   clearMem();
 });
+
+addmouseHover(equalsButton);
 
 equalsButton.addEventListener("click", () => {
   numbers.push(parseFloat(displayBox.textContent));
@@ -82,6 +88,15 @@ function multiply(num1, num2) {
 }
 function divide(num1, num2) {
   return num1 / num2;
+}
+
+function addmouseHover(element) {
+  element.addEventListener("mouseover", () => {
+    element.style.filter = "brightness(90%)";
+  });
+  element.addEventListener("mouseleave", () => {
+    element.style.filter = "";
+  });
 }
 
 function operate(num1, num2, operator) {
