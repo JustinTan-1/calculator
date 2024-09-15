@@ -36,7 +36,7 @@
 
 .clear {
   height: 40px;
-  width: 275px;
+  width: 130px;
 }
 
 .compute {
@@ -47,4 +47,9 @@
   background-color: lightyellow;
   height: 60px;
   width: 60px;
+}
+
+.delete {
+  height: 40px;
+  width: 130px;
 }
