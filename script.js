@@ -4,6 +4,7 @@ const clearButton = document.querySelector(".clear");
 const operatorButtons = document.querySelectorAll(".operator");
 const equalsButton = document.querySelector(".compute");
 const pointButton = document.querySelector(".point");
+const deleteButton = document.querySelector(".delete");
 
 let numbers = [];
 let operator = "";
@@ -63,6 +64,13 @@ equalsButton.addEventListener("click", () => {
   numbers.push(parseFloat(displayBox.textContent));
   overflow = false;
   operate(numbers[0], numbers[1], operator);
+});
+
+deleteButton.addEventListener("click", () => {
+  const displayCharacters = displayBox.textContent.split("");
+  console.log(displayCharacters);
+  displayCharacters.pop();
+  displayBox.textContent = displayCharacters.join("");
 });
 
 function clearDisplay() {
