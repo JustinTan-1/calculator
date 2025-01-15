@@ -1,5 +1,2 @@
-Calculator App
-
-# calculator
-Calculator with ui
-Install and run on any browser
+# Calculator
+Calculator with ui. Install and run on any browser.
